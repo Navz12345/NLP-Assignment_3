@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project implements the full two-stage sequential instruction-tuning pipelinewith judge evaluation. The student model is **`microsoft/Phi-3.5-mini-instruct`**, trained first on Alpaca-style general instruction data and then further tuned on a teacher-generated structured JSON dataset. The main goal was to study whether Stage 2 JSON specialization improves structured-output behavior without causing catastrophic forgetting of the general instruction-following ability learned in Stage 1.
+This project implements the full two-stage sequential instruction-tuning pipeline with judge evaluation. The student model is **`microsoft/Phi-3.5-mini-instruct`**, trained first on Alpaca-style general instruction data and then further tuned on a teacher-generated structured JSON dataset. The main goal was to study whether Stage 2 JSON specialization improves structured-output behavior without causing catastrophic forgetting of the general instruction-following ability learned in Stage 1.
 
 The final outcome is that **catastrophic forgetting was not observed**. Automatic Alpaca metrics changed only slightly from Checkpoint 1 to Checkpoint 2, and judge comparisons frequently preferred Checkpoint 2 over Checkpoint 1 on held-out Alpaca prompts. At the same time, JSON validity became very high, although strict schema-based JSON gains remained modest under the benchmark design used here.
 
