@@ -314,7 +314,7 @@ This made the judge outputs reproducible and easy to aggregate.
 
 ---
 
-## Short README / Blog Summary
+## Short Blog Summary
 
 This project studies whether a small model can be fine-tuned sequentially for structured JSON behavior without forgetting earlier general instruction-following ability. I used `Phi-3.5-mini-instruct` as the student, trained it first on a `10,000`-example subset of `yahma/alpaca-cleaned`, and then continued tuning it on a teacher-generated JSON dataset created with `llama-3.3-70b-instruct-awq`.
 
