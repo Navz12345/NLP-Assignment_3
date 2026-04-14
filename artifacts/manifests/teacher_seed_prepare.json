@@ -1,0 +1,5 @@
+{
+  "train_seed_count": 300,
+  "eval_seed_count": 200,
+  "source_path": "data/raw/json_prompt_seeds_full.json"
+}

@@ -1,0 +1,77 @@
+experiment_name: phi35_sequential_tuning_utsa
+models:
+  student_model_name: microsoft/Phi-3.5-mini-instruct
+  student_hf_token_env: HF_TOKEN
+  teacher_provider: openai_compatible
+  teacher_model_name: llama-3.3-70b-instruct-awq
+  teacher_api_key_env: UTSA_LLAMA_API_KEY
+  teacher_base_url_env: UTSA_LLAMA_BASE_URL
+  judge_provider: openai_compatible
+  judge_model_name: llama-3.3-70b-instruct-awq
+  judge_api_key_env: UTSA_LLAMA_API_KEY
+  judge_base_url_env: UTSA_LLAMA_BASE_URL
+  inference_provider: hf_local
+  inference_model_name: microsoft/Phi-3.5-mini-instruct
+data:
+  alpaca_raw_path: data/raw/alpaca_cleaned.json
+  alpaca_train_path: data/processed/alpaca_train.jsonl
+  alpaca_eval_path: data/processed/alpaca_eval.jsonl
+  teacher_prompt_seed_path: data/raw/json_prompt_seeds_full.json
+  teacher_train_path: data/processed/teacher_train.jsonl
+  teacher_eval_path: data/processed/teacher_eval.jsonl
+  sample_size: 100
+  random_seed: 42
+stage1:
+  dataset_path: data/processed/alpaca_train.jsonl
+  output_dir: artifacts/checkpoints/stage1_10k
+  epochs: 2
+  learning_rate: 2.0e-5
+  per_device_train_batch_size: 2
+  gradient_accumulation_steps: 8
+  max_seq_length: 2048
+  lora_r: 16
+  lora_alpha: 32
+  lora_dropout: 0.05
+stage2:
+  dataset_path: data/processed/teacher_train.jsonl
+  output_dir: artifacts/checkpoints/stage2_10k_300json
+  epochs: 2
+  learning_rate: 1.0e-5
+  per_device_train_batch_size: 2
+  gradient_accumulation_steps: 8
+  max_seq_length: 2048
+  lora_r: 16
+  lora_alpha: 32
+  lora_dropout: 0.05
+evaluation:
+  output_root: artifacts/evaluations
+  checkpoints:
+    - checkpoint_0
+    - checkpoint_1
+    - checkpoint_2
+  judge_dimensions:
+    - instruction_following
+    - correctness
+    - clarity
+    - completeness
+    - structured_output_validity
+    - hallucination_risk
+  swap_order: true
+  max_prompts: 200
+runtime:
+  artifacts_root: artifacts
+  prompts_dir: prompts
+  project_root: .
+  use_mock_backends: false
+  full_run_guard_file: artifacts/full_run_completed.flag
+extras:
+  justification:
+    student_model_choice: "Phi-3.5 Mini Instruct is the primary student because it is explicitly recommended in the assignment and is practical for QLoRA on UTSA HPC."
+    teacher_and_judge_choice: "Llama 3.3 70B Instruct on UTSA is the default strong teacher/judge for synthetic JSON supervision and pairwise evaluation."
+  fallback:
+    when_to_use_qwen3_8b: "Use the fallback config if HF access is rate-limited or if local model download or inference is blocked."
+  ablations:
+    stage2_epochs: [1, 2, 3]
+    stage2_learning_rates: [2.0e-5, 1.0e-5, 5.0e-6]
+    stage2_dataset_fractions: [1.0, 0.5, 0.25]
+

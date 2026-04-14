@@ -1,0 +1,66 @@
+experiment_name: sequential_tuning_sample
+models:
+  student_model_name: microsoft/Phi-3.5-mini-instruct
+  teacher_provider: mock
+  teacher_model_name: mock-teacher
+  judge_provider: mock
+  judge_model_name: mock-judge
+  inference_provider: mock
+  inference_model_name: mock-student
+data:
+  alpaca_raw_path: data/sample/alpaca_sample.json
+  alpaca_train_path: data/processed/alpaca_train.jsonl
+  alpaca_eval_path: data/processed/alpaca_eval.jsonl
+  teacher_prompt_seed_path: data/sample/json_prompt_seeds.json
+  teacher_train_path: data/processed/teacher_train.jsonl
+  teacher_eval_path: data/processed/teacher_eval.jsonl
+  sample_size: 5
+  random_seed: 42
+stage1:
+  dataset_path: data/processed/alpaca_train.jsonl
+  output_dir: artifacts/checkpoints/stage1
+  epochs: 1
+  learning_rate: 2.0e-5
+  per_device_train_batch_size: 2
+  gradient_accumulation_steps: 4
+  max_seq_length: 1024
+  lora_r: 16
+  lora_alpha: 32
+  lora_dropout: 0.05
+stage2:
+  dataset_path: data/processed/teacher_train.jsonl
+  output_dir: artifacts/checkpoints/stage2
+  epochs: 1
+  learning_rate: 1.0e-5
+  per_device_train_batch_size: 2
+  gradient_accumulation_steps: 4
+  max_seq_length: 1024
+  lora_r: 16
+  lora_alpha: 32
+  lora_dropout: 0.05
+evaluation:
+  output_root: artifacts/evaluations
+  checkpoints:
+    - checkpoint_0
+    - checkpoint_1
+    - checkpoint_2
+  judge_dimensions:
+    - instruction_following
+    - correctness
+    - clarity
+    - completeness
+    - structured_output_validity
+    - hallucination_risk
+  swap_order: true
+  max_prompts: 100
+runtime:
+  artifacts_root: artifacts
+  prompts_dir: prompts
+  project_root: .
+  use_mock_backends: true
+  full_run_guard_file: artifacts/full_run_completed.flag
+extras:
+  notes:
+    - Sample config is for local smoke tests only.
+    - Switch to full.yaml and real providers before final experiments.
+

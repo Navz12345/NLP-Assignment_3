@@ -1,0 +1,12 @@
+{
+  "checkpoint": "checkpoint_2",
+  "json_validity_rate": 0.985,
+  "schema_compliance_rate": 0.36,
+  "exact_match_rate": 0.0,
+  "field_level_f1": 0.0,
+  "error_taxonomy": {
+    "other_parse_error": 2,
+    "missing_value": 1
+  },
+  "count": 200
+}

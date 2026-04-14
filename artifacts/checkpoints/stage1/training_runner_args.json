@@ -1,0 +1,17 @@
+{
+  "model_name": "microsoft/Phi-3.5-mini-instruct",
+  "dataset_path": "data/processed/alpaca_train.jsonl",
+  "output_dir": "artifacts/checkpoints/stage1",
+  "epochs": 2,
+  "learning_rate": 2e-05,
+  "batch_size": 2,
+  "grad_accum": 8,
+  "max_seq_length": 2048,
+  "lora_r": 16,
+  "lora_alpha": 32,
+  "lora_dropout": 0.05,
+  "resume_from_checkpoint": null,
+  "hf_token_env": "HF_TOKEN",
+  "dry_run": false,
+  "status": "starting_training"
+}

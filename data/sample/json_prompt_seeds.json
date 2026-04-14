@@ -1,0 +1,88 @@
+[
+  {
+    "split": "train",
+    "task_type": "json_extraction",
+    "instruction": "Extract the person names and dates from the text into valid JSON.",
+    "input": "Ada Lovelace submitted notes on 1843-09-01. Charles Babbage reviewed them on 1843-09-08.",
+    "schema": {"entities": "array", "dates": "array"},
+    "reference_output": "{\"entities\": [{\"type\": \"person\", \"text\": \"Ada Lovelace\"}, {\"type\": \"person\", \"text\": \"Charles Babbage\"}], \"dates\": [\"1843-09-01\", \"1843-09-08\"]}"
+  },
+  {
+    "split": "train",
+    "task_type": "schema_generation",
+    "instruction": "Generate a JSON task object that matches the schema.",
+    "input": "Create a high-priority task for preparing slides.",
+    "schema": {"title": "string", "priority": "string", "done": "boolean"},
+    "reference_output": "{\"title\": \"Prepare slides\", \"priority\": \"high\", \"done\": false}"
+  },
+  {
+    "split": "train",
+    "task_type": "json_classification",
+    "instruction": "Classify the support ticket and return JSON only.",
+    "input": "The mobile app crashes every time I open settings after the latest update.",
+    "schema": {"label": "string", "confidence": "number"},
+    "reference_output": "{\"label\": \"bug_report\", \"confidence\": 0.98}"
+  },
+  {
+    "split": "train",
+    "task_type": "json_repair",
+    "instruction": "Repair the malformed JSON and return only the corrected JSON object.",
+    "input": "{\"user\": \"Maya\", \"active\": true,",
+    "schema": {"user": "string", "active": "boolean"},
+    "reference_output": "{\"user\": \"Maya\", \"active\": true}"
+  },
+  {
+    "split": "train",
+    "task_type": "tool_call_generation",
+    "instruction": "Generate tool-call arguments as JSON for the described request.",
+    "input": "Book a hotel in Austin for 2 nights starting next Friday for 1 guest.",
+    "schema": {"tool_name": "string", "arguments": "object"},
+    "reference_output": "{\"tool_name\": \"search_hotels\", \"arguments\": {\"city\": \"Austin\", \"nights\": 2, \"guests\": 1}}"
+  },
+  {
+    "split": "eval",
+    "task_type": "json_extraction",
+    "instruction": "Extract entities and dates into valid JSON.",
+    "input": "Grace Hopper spoke in Boston on 1952-06-10 and returned on 1952-06-14.",
+    "schema": {"entities": "array", "dates": "array"},
+    "output": "{\"entities\": [{\"type\": \"person\", \"text\": \"Grace Hopper\"}, {\"type\": \"location\", \"text\": \"Boston\"}], \"dates\": [\"1952-06-10\", \"1952-06-14\"]}",
+    "reference_output": "{\"entities\": [{\"type\": \"person\", \"text\": \"Grace Hopper\"}, {\"type\": \"location\", \"text\": \"Boston\"}], \"dates\": [\"1952-06-10\", \"1952-06-14\"]}"
+  },
+  {
+    "split": "eval",
+    "task_type": "schema_generation",
+    "instruction": "Produce a valid JSON object following the schema.",
+    "input": "Create a medium-priority task for drafting the report.",
+    "schema": {"title": "string", "priority": "string", "done": "boolean"},
+    "output": "{\"title\": \"Draft report\", \"priority\": \"medium\", \"done\": false}",
+    "reference_output": "{\"title\": \"Draft report\", \"priority\": \"medium\", \"done\": false}"
+  },
+  {
+    "split": "eval",
+    "task_type": "json_classification",
+    "instruction": "Classify the message and return JSON only.",
+    "input": "Please cancel my subscription before the next billing cycle.",
+    "schema": {"label": "string", "confidence": "number"},
+    "output": "{\"label\": \"billing\", \"confidence\": 0.94}",
+    "reference_output": "{\"label\": \"billing\", \"confidence\": 0.94}"
+  },
+  {
+    "split": "eval",
+    "task_type": "json_repair",
+    "instruction": "Fix the malformed JSON into valid JSON.",
+    "input": "{\"name\": \"Riya\", \"score\": 9.5",
+    "schema": {"name": "string", "score": "number"},
+    "output": "{\"name\": \"Riya\", \"score\": 9.5}",
+    "reference_output": "{\"name\": \"Riya\", \"score\": 9.5}"
+  },
+  {
+    "split": "eval",
+    "task_type": "tool_call_generation",
+    "instruction": "Return tool-call arguments as JSON.",
+    "input": "Find three vegetarian restaurants in Chicago that are open now.",
+    "schema": {"tool_name": "string", "arguments": "object"},
+    "output": "{\"tool_name\": \"search_restaurants\", \"arguments\": {\"city\": \"Chicago\", \"party_size\": 3, \"diet\": \"vegetarian\", \"open_now\": true}}",
+    "reference_output": "{\"tool_name\": \"search_restaurants\", \"arguments\": {\"city\": \"Chicago\", \"party_size\": 3, \"diet\": \"vegetarian\", \"open_now\": true}}"
+  }
+]
+

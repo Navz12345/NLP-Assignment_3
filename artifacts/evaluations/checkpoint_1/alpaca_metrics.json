@@ -1,0 +1,9 @@
+{
+  "checkpoint": "checkpoint_1",
+  "avg_overlap_f1": 0.25920390505398927,
+  "rouge_l": 0.2266578084644754,
+  "bertscore_f1": 0.8666943907737732,
+  "avg_output_tokens": 58.82,
+  "task_completion_rate": 1.0,
+  "count": 100
+}

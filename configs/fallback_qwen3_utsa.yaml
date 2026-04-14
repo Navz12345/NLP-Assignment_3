@@ -1,0 +1,71 @@
+experiment_name: qwen3_fallback_sequential_tuning_utsa
+models:
+  student_model_name: Qwen/Qwen3-8B
+  student_hf_token_env: HF_TOKEN
+  teacher_provider: openai_compatible
+  teacher_model_name: llama-3.3-70b-instruct-awq
+  teacher_api_key_env: UTSA_LLAMA_API_KEY
+  teacher_base_url_env: UTSA_LLAMA_BASE_URL
+  judge_provider: openai_compatible
+  judge_model_name: llama-3.3-70b-instruct-awq
+  judge_api_key_env: UTSA_LLAMA_API_KEY
+  judge_base_url_env: UTSA_LLAMA_BASE_URL
+  inference_provider: openai_compatible
+  inference_model_name: Qwen/Qwen3-8B
+  inference_api_key_env: UTSA_QWEN_API_KEY
+  inference_base_url_env: UTSA_QWEN_BASE_URL
+data:
+  alpaca_raw_path: data/raw/alpaca_cleaned.json
+  alpaca_train_path: data/processed/alpaca_train.jsonl
+  alpaca_eval_path: data/processed/alpaca_eval.jsonl
+  teacher_prompt_seed_path: data/raw/json_prompt_seeds_full.json
+  teacher_train_path: data/processed/teacher_train.jsonl
+  teacher_eval_path: data/processed/teacher_eval.jsonl
+  sample_size: 100
+  random_seed: 42
+stage1:
+  dataset_path: data/processed/alpaca_train.jsonl
+  output_dir: artifacts/checkpoints/stage1_qwen3
+  epochs: 2
+  learning_rate: 2.0e-5
+  per_device_train_batch_size: 2
+  gradient_accumulation_steps: 8
+  max_seq_length: 2048
+  lora_r: 16
+  lora_alpha: 32
+  lora_dropout: 0.05
+stage2:
+  dataset_path: data/processed/teacher_train.jsonl
+  output_dir: artifacts/checkpoints/stage2_qwen3
+  epochs: 2
+  learning_rate: 1.0e-5
+  per_device_train_batch_size: 2
+  gradient_accumulation_steps: 8
+  max_seq_length: 2048
+  lora_r: 16
+  lora_alpha: 32
+  lora_dropout: 0.05
+evaluation:
+  output_root: artifacts/evaluations_qwen3
+  checkpoints:
+    - checkpoint_0
+    - checkpoint_1
+    - checkpoint_2
+  judge_dimensions:
+    - instruction_following
+    - correctness
+    - clarity
+    - completeness
+    - structured_output_validity
+    - hallucination_risk
+  swap_order: true
+  max_prompts: 100
+runtime:
+  artifacts_root: artifacts
+  prompts_dir: prompts
+  project_root: .
+  use_mock_backends: false
+  full_run_guard_file: artifacts/full_run_completed_qwen3.flag
+extras:
+  fallback_reason: "Use this config only if the Phi-3.5 Mini local path is blocked by access, rate limit, or connectivity issues."
+

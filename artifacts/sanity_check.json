@@ -1,0 +1,11 @@
+{
+  "config_loaded": true,
+  "alpaca_source_exists": true,
+  "teacher_seed_exists": true,
+  "teacher_prompt_exists": true,
+  "judge_prompt_exists": true,
+  "full_mode": true,
+  "mock_backends_disabled": true,
+  "hpc_stage1_script_exists": true,
+  "hpc_stage2_script_exists": true
+}

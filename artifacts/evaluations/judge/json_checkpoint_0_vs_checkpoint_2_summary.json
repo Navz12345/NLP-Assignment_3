@@ -1,0 +1,14 @@
+{
+  "checkpoint_a": "checkpoint_0",
+  "checkpoint_b": "checkpoint_2",
+  "task_group": "json",
+  "wins": {
+    "A": 35,
+    "B": 5,
+    "tie": 160
+  },
+  "count": 200,
+  "win_rate_a": 0.175,
+  "win_rate_b": 0.025,
+  "tie_rate": 0.8
+}

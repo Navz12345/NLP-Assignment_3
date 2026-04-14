@@ -1,0 +1,16 @@
+.env
+.venv/
+__pycache__/
+.pytest_cache/
+*.pyc
+artifacts/checkpoints/stage2_10k_300json/checkpoint-19/
+artifacts/checkpoints/stage2_10k_300json/checkpoint-38/
+
+artifacts/checkpoints/stage2_10k/checkpoint-13/
+artifacts/checkpoints/stage2_10k/checkpoint-26/
+
+artifacts/checkpoints/stage1_10k/checkpoint-625/
+artifacts/checkpoints/stage1_10k/checkpoint-1250/
+
+artifacts/checkpoints/combined_10k_json300/checkpoint-644/
+artifacts/checkpoints/combined_10k_json300/checkpoint-1288/

@@ -1,0 +1,13 @@
+You are an LLM judge comparing two candidate responses for the same task.
+Return only valid JSON with keys: response_a_scores, response_b_scores, winner, justification.
+Use these scoring dimensions: {dimensions}.
+Prompt ID: {prompt_id}
+Task Group: {task_group}
+Instruction: {instruction}
+Input: {input_text}
+Response A:
+{response_a}
+Response B:
+{response_b}
+Winner must be one of: A, B, tie.
+

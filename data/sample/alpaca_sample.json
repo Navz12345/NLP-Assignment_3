@@ -1,0 +1,39 @@
+[
+  {
+    "instruction": "Summarize the importance of unit testing in three sentences.",
+    "input": "",
+    "output": "Unit tests catch regressions early and make refactoring safer. They document expected behavior in executable form. They also reduce debugging time by isolating failures quickly.",
+    "task_type": "summarization"
+  },
+  {
+    "instruction": "Rewrite the sentence in a more professional tone.",
+    "input": "Hey team, this thing is broken again and needs a fix ASAP.",
+    "output": "Hello team, this issue has reappeared and requires prompt attention.",
+    "task_type": "rewriting"
+  },
+  {
+    "instruction": "Brainstorm four project ideas for an AI systems class.",
+    "input": "",
+    "output": "1. Build a retrieval-augmented tutor. 2. Compare judge prompts for evaluation reliability. 3. Fine-tune a small model for structured extraction. 4. Analyze tool-use planning in agentic systems.",
+    "task_type": "brainstorming"
+  },
+  {
+    "instruction": "Answer the question briefly.",
+    "input": "What is catastrophic forgetting in sequential fine-tuning?",
+    "output": "Catastrophic forgetting is the loss of previously learned capabilities when a model is further trained on a new objective or dataset.",
+    "task_type": "qa"
+  },
+  {
+    "instruction": "Provide a concise explanation of QLoRA.",
+    "input": "",
+    "output": "QLoRA fine-tunes a quantized base model using low-rank adapters, which reduces memory usage while preserving strong training performance.",
+    "task_type": "explanation"
+  },
+  {
+    "instruction": "Write a short checklist for debugging a failing data pipeline.",
+    "input": "",
+    "output": "Check input assumptions, validate intermediate artifacts, inspect logs, reproduce on a small sample, and confirm the final output schema.",
+    "task_type": "checklist"
+  }
+]
+

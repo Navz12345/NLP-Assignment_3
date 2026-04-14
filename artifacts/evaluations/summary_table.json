@@ -1,0 +1,43 @@
+{
+  "rows": [
+    {
+      "checkpoint": "checkpoint_0",
+      "alpaca_avg_overlap_f1": 0.2606399748752492,
+      "alpaca_rouge_l": 0.22828443273196455,
+      "alpaca_bertscore_f1": 0.8672013878822327,
+      "alpaca_task_completion_rate": 1.0,
+      "json_validity_rate": 0.985,
+      "schema_compliance_rate": 0.36,
+      "exact_match_rate": 0.0,
+      "field_level_f1": 0.0
+    },
+    {
+      "checkpoint": "checkpoint_1",
+      "alpaca_avg_overlap_f1": 0.25920390505398927,
+      "alpaca_rouge_l": 0.2266578084644754,
+      "alpaca_bertscore_f1": 0.8666943907737732,
+      "alpaca_task_completion_rate": 1.0,
+      "json_validity_rate": 0.985,
+      "schema_compliance_rate": 0.37,
+      "exact_match_rate": 0.0,
+      "field_level_f1": 0.0
+    },
+    {
+      "checkpoint": "checkpoint_2",
+      "alpaca_avg_overlap_f1": 0.2574586107497151,
+      "alpaca_rouge_l": 0.2230719160689303,
+      "alpaca_bertscore_f1": 0.8659539818763733,
+      "alpaca_task_completion_rate": 1.0,
+      "json_validity_rate": 0.985,
+      "schema_compliance_rate": 0.36,
+      "exact_match_rate": 0.0,
+      "field_level_f1": 0.0
+    }
+  ],
+  "forgetting_analysis": {
+    "alpaca_overlap_f1_change": -0.0017452943042741698,
+    "alpaca_rouge_l_change": -0.003585892395545104,
+    "alpaca_bertscore_f1_change": -0.0007404088973999023,
+    "json_validity_change": 0.0
+  }
+}

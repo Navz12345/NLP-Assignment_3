@@ -1,0 +1,66 @@
+experiment_name: sequential_tuning_full
+models:
+  student_model_name: microsoft/Phi-3.5-mini-instruct
+  teacher_provider: openai_compatible
+  teacher_model_name: meta-llama/Llama-3.1-70B-Instruct
+  judge_provider: openai_compatible
+  judge_model_name: meta-llama/Llama-3.1-70B-Instruct
+  inference_provider: hf_local
+  inference_model_name: microsoft/Phi-3.5-mini-instruct
+data:
+  alpaca_raw_path: data/raw/alpaca_cleaned.json
+  alpaca_train_path: data/processed/alpaca_train.jsonl
+  alpaca_eval_path: data/processed/alpaca_eval.jsonl
+  teacher_prompt_seed_path: data/raw/json_prompt_seeds_full.json
+  teacher_train_path: data/processed/teacher_train.jsonl
+  teacher_eval_path: data/processed/teacher_eval.jsonl
+  sample_size: 100
+  random_seed: 42
+stage1:
+  dataset_path: data/processed/alpaca_train.jsonl
+  output_dir: artifacts/checkpoints/stage1
+  epochs: 2
+  learning_rate: 2.0e-5
+  per_device_train_batch_size: 2
+  gradient_accumulation_steps: 8
+  max_seq_length: 2048
+  lora_r: 16
+  lora_alpha: 32
+  lora_dropout: 0.05
+stage2:
+  dataset_path: data/processed/teacher_train.jsonl
+  output_dir: artifacts/checkpoints/stage2
+  epochs: 2
+  learning_rate: 1.0e-5
+  per_device_train_batch_size: 2
+  gradient_accumulation_steps: 8
+  max_seq_length: 2048
+  lora_r: 16
+  lora_alpha: 32
+  lora_dropout: 0.05
+evaluation:
+  output_root: artifacts/evaluations
+  checkpoints:
+    - checkpoint_0
+    - checkpoint_1
+    - checkpoint_2
+  judge_dimensions:
+    - instruction_following
+    - correctness
+    - clarity
+    - completeness
+    - structured_output_validity
+    - hallucination_risk
+  swap_order: true
+  max_prompts: 100
+runtime:
+  artifacts_root: artifacts
+  prompts_dir: prompts
+  project_root: .
+  use_mock_backends: false
+  full_run_guard_file: artifacts/full_run_completed.flag
+extras:
+  ablations:
+    stage2_epochs: [1, 2, 3]
+    stage2_learning_rates: [2.0e-5, 1.0e-5, 5.0e-6]
+    stage2_dataset_fractions: [1.0, 0.5, 0.25]

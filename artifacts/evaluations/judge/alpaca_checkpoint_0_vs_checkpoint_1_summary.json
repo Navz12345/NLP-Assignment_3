@@ -1,0 +1,14 @@
+{
+  "checkpoint_a": "checkpoint_0",
+  "checkpoint_b": "checkpoint_1",
+  "task_group": "alpaca",
+  "wins": {
+    "A": 27,
+    "B": 29,
+    "tie": 44
+  },
+  "count": 100,
+  "win_rate_a": 0.27,
+  "win_rate_b": 0.29,
+  "tie_rate": 0.44
+}

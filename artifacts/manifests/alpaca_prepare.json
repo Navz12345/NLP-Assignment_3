@@ -1,0 +1,5 @@
+{
+  "train_count": 51874,
+  "eval_count": 100,
+  "source_path": "data/raw/alpaca_cleaned.json"
+}

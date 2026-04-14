@@ -1,0 +1,13 @@
+pyyaml>=6.0
+openai>=1.30.0
+transformers>=4.45.0
+datasets>=2.20.0
+peft>=0.12.0
+trl>=0.10.1
+accelerate>=0.33.0
+bitsandbytes>=0.43.1
+rouge-score>=0.1.2
+bert-score>=0.3.13
+scikit-learn>=1.5.1
+pytest>=8.3.2
+
