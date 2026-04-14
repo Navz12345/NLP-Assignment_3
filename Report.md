@@ -56,7 +56,7 @@ Each required task family received equal coverage:
 - **40 evaluation prompts per task type**
 
 ### Teacher Model
-The teacher model used for synthetic supervision was **`llama-3.3-70b-instruct-awq`** via the UTSA-hosted API. Each structured prompt was submitted to the teacher model, and the resulting outputs were validated for JSON correctness before inclusion in the final Stage 2 training set.
+The teacher model used for synthetic supervision was **`llama-3.3-70b-instruct-awq`**. Each structured prompt was submitted to the teacher model, and the resulting outputs were validated for JSON correctness before inclusion in the final Stage 2 training set.
 
 The final generation pass produced:
 
