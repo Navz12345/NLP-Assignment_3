@@ -11,12 +11,12 @@ The final outcome is that **catastrophic forgetting was not observed**. Automati
 ## 1. Methodology
 
 ### Student Model
-The student model used in this project was **`microsoft/Phi-3.5-mini-instruct`**. This model was chosen because it is explicitly recommended in the assignment as a practical small-model default for QLoRA-based post-training. It is large enough to support meaningful instruction-following behavior, yet small enough to fine-tune efficiently in a realistic research workflow.
+The student model used in this project was **`microsoft/Phi-3.5-mini-instruct`**. This model was the first choice as it is recommended in the case study guidelines as a practical small-model default for QLoRA-based post-training. It is large enough to support meaningful instruction-following behavior, yet small enough to fine-tune efficiently in a realistic research workflow.
 
 ### Stage 1: Alpaca Fine-Tuning
 For Stage 1, I used **`yahma/alpaca-cleaned`** as the Alpaca-style instruction dataset. This cleaned version was selected because it is better curated and easier to justify than the original raw Alpaca release. To keep the project computationally manageable while still preserving experimental value, I trained on a **10,000-example subset** rather than the full dataset.
 
-The Alpaca held-out evaluation set contained **100 prompts**, which satisfies the assignment requirement of at least 100 general instruction-following evaluation examples.
+The Alpaca held-out evaluation set contained **100 prompts** general instruction-following evaluation examples.
 
 ### Stage 2: Teacher-Generated JSON Dataset
 For Stage 2, I built a structured JSON benchmark covering all five required task families:
