@@ -53,7 +53,7 @@ That command will:
 - run pairwise mock judge comparisons
 - write an aggregated summary table
 
-## Recommended UTSA workflow
+## Recommended workflow
 
 Primary config:
 
